@@ -1,0 +1,5 @@
+a = Scrapper::DataPuller.new
+a.get_data
+
+a = Report.last
+a.print_report
