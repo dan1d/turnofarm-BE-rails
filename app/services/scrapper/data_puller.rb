@@ -16,7 +16,7 @@ module Scrapper
     end
 
 
-    def get_data
+    def save
       entries = doc.css('#listado-farmacias p a')
       entries.each do |entry|
         company_source_id = entry["href"].split("=").last

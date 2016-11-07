@@ -12,11 +12,17 @@ module Scrapper
       @city = City.where(province_id: province.id, name: hash[:city].try(:titleize)).first_or_create
     end
 
-    def assign_address
+    def address
       return @address if @address
       @address = company.addresses
-      .where(hash.except(:city)).first_or_create
+      .where(address_attributes).first_or_create
       @address
+    end
+
+    def address_attributes
+      attr = hash.except(:city)
+      attr[:city] = city
+      attr
     end
   end
 end

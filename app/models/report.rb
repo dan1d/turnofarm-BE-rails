@@ -8,4 +8,13 @@ class Report < ApplicationRecord
       puts rc.address.print_values
     end
   end
+
+  def self.get_report(params)
+    puts params.inspect
+    if params[:id]
+      find(params[:id])
+    elsif date = params[:date].try(:to_date)
+      where(date: date).first # todo scope by prov.
+    end
+  end
 end

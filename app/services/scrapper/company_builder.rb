@@ -20,7 +20,7 @@ module Scrapper
         hash[entry.text] = paragraph_text.strip
       end
       fill_company
-      assign_address
+      create_address
     end
 
     def company_created?
@@ -32,7 +32,7 @@ module Scrapper
       company.update_attributes(name: company_name)
     end
 
-    def assign_address
+    def create_address
       text = doc.css(".entry-content script").text
       geolocation = {lat: "", long: ""}
       if text.present?
@@ -47,7 +47,7 @@ module Scrapper
         latitude: geolocation[:lat],
         longitude: geolocation[:long]
       }
-      @address = Scrapper::Address.new(company, province, address_hash).assign_address
+      @address = Scrapper::Address.new(company, province, address_hash).address
     end
 
     def string_between_markers(marker1, marker2)
