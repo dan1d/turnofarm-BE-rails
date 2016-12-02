@@ -2,7 +2,7 @@ class Dashboard
   include ActiveModel::Model
   include ActiveModel::Serialization
 
-  attr_accessor :params, :report
+  attr_accessor :params
 
   def selected
     @selected ||= Address.where(id: params[:address_id]).first

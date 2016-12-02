@@ -10,11 +10,14 @@ class Report < ApplicationRecord
   end
 
   def self.get_report(params)
-    puts params.inspect
     if params[:id]
       find(params[:id])
     elsif date = params[:date].try(:to_date)
       where(date: date).first # todo scope by prov.
     end
+  end
+
+  def self.create_report(date = Date.today)
+    Scrapper::DataPuller.new(date).save
   end
 end
