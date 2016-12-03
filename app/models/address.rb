@@ -25,7 +25,7 @@ class Address < ApplicationRecord
   def self.location_scope(params)
     latitude = Float(params[:latitude])
     longitude = Float(params[:longitude])
-    within(20, origin: [latitude, longitude]).order('distance DESC')
+    within(20, origin: [latitude, longitude])
   end
 
   def self.report_scope(report_id)
