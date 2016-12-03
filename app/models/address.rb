@@ -15,15 +15,17 @@ class Address < ApplicationRecord
   end
 
   def self.find_addresses(params, report_id, without_id: nil)
-    scp = report_scope(report_id)
-    scp = without_id ? scp.without_address(without_id) : scp
-    scp.location_scope(params)
+    if without_id
+      report_scope(report_id).without_address(without_id)
+    else
+      report_scope(report_id).location_scope(params)
+    end
   end
 
   def self.location_scope(params)
     latitude = Float(params[:latitude])
     longitude = Float(params[:longitude])
-    within(20, origin: [latitude, longitude])
+    within(20, origin: [latitude, longitude]).order('distance DESC')
   end
 
   def self.report_scope(report_id)
