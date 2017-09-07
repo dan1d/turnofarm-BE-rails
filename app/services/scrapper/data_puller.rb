@@ -4,7 +4,7 @@ module Scrapper
 
   class DataPuller
     attr_accessor :date, :doc, :addresses, :report, :province
-    BASE_URL = "http://cofatuc.org.ar"
+    BASE_URL = "https://cofatuc.org.ar"
     REPORT_URL = BASE_URL + "/farmacias-de-turno/?fecha="
 
     def initialize(date = Date.today)
